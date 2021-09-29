@@ -16,7 +16,6 @@ import utils.utils as util
 import utils.quantization as q
 import h5py
 
-from model.vanilla.youhome_resnet import resnet
 from models import *
 
 import numpy as np
@@ -34,6 +33,7 @@ parser = argparse.ArgumentParser(description='PyTorch RadioML Training')
 parser.add_argument('--data_dir', '-d', type=str, default='../../../RadioML/Data/GOLD_XYZ_OSC.0001_1024.hdf5',
                     help='path to the dataset directory')
 parser.add_argument('--arch', metavar='ARCH', default='resnet', help='Choose a model')
+parser.add_argument('--save', '-s', action='store_true', help='save the model')
 parser.add_argument('--save_folder', type=str, default='./saves/',
                     help='Folder to save checkpoints and log.')
 parser.add_argument('--epochs', '-e', type=int, default=200, help='Number of epochs to train')
@@ -48,6 +48,7 @@ parser.add_argument('--resume', '-r', type=str, default=None,
 
 parser.add_argument('--which_gpus', '-gpu', type=str, default='0', help='which gpus to use')
 args = parser.parse_args()
+print(args)
 
 
 #----------------------------
@@ -323,17 +324,7 @@ def test_accu(testloader, net, device, log, num_iter = 1):
     return val_acc, val_loss
 
 
-dataset = radioml_18_dataset(dataset_path)
-
-mod = 12 # 0 to 23
-snr_idx = 25 # 0 to 25 = -20dB to +30dB
-sample = 123 # 0 to 4095
-#-----------------------#
-idx = 26*4096*mod + 4096*snr_idx + sample
-data, mod, snr = dataset.data[idx], dataset.mod[idx], dataset.snr[idx]
-plt.figure(figsize=(12,4))
-plt.plot(data)
-print("Modulation: %s, SNR: %.1f dB, Index: %d" % (dataset.mod_classes[mod], snr, idx))
+dataset = radioml_18_dataset(args.data_dir)
 
 #----------------------------
 # Log
@@ -357,8 +348,8 @@ def main():
         os.makedirs(args.save_folder)
     log = open(os.path.join(args.save_folder, 'log.txt'), 'w')
     print_log('save path : {}'.format(args.save_folder), log)
-    state = {k: v for k, v in args}
-    print_log(state, log)
+    # state = {k: v for k, v in args}
+    # print_log(state, log)
     print_log("python version : {}".format(
         sys.version.replace('\n', ' ')), log)
     print_log("torch  version : {}".format(torch.__version__), log)
@@ -371,7 +362,7 @@ def main():
 
     # net = models.resnet18(pretrained=True)
     # net.fc = nn.Linear(512, args.num_classes)
-    net = UltraNet(num_classes=args.num_classes)
+    net = UltraNet()
     # net = generate_model(_ARCH)
     print_log("{} \n".format(net), log)
     n_param = sum(p.numel() for p in net.parameters() if p.requires_grad)
@@ -408,8 +399,6 @@ def main():
     if args.test:
         print_log("Mode: Test only.", log)
         test_accu(testloader, net, device, log)
-        if 'pg' in _ARCH:
-            sparsity(testloader, net, device)
 
     #-----------------
     # Finetune
@@ -449,7 +438,7 @@ def main():
         #-----------
         # Scheduler
         #-----------
-        lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=5, T_mult=1)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=5, T_mult=1)
         
         start_epoch = 0
         print_log("Start training.", log)

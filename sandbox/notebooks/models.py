@@ -1,8 +1,13 @@
+import os
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.init as init
-import os
+import brevitas.nn as qnn
+from brevitas.quant import IntBias
+from brevitas.inject.enum import ScalingImplType
+from brevitas.inject.defaults import Int8ActPerTensorFloatMinMaxInit
 
 class ResBlock(nn.Module):
     expansion = 1
@@ -116,7 +121,7 @@ def resnet20(num_classes=10):
     return ResNet(BasicBlock, [3, 3, 3], num_classes=num_classes)
 
 class InputQuantizer(Int8ActPerTensorFloatMinMaxInit):
-    bit_width = input_bits
+    bit_width = 8
     min_val = -2.0
     max_val = 2.0
     scaling_impl_type = ScalingImplType.CONST # Fix the quantization range to [min_val, max_val]
@@ -124,25 +129,25 @@ class InputQuantizer(Int8ActPerTensorFloatMinMaxInit):
 class UltraNet(nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv0 = nn.Conv1d(2, 16, kernel_size=3, padding='valid')
+        self.conv0 = nn.Conv1d(2, 16, kernel_size=3, padding=1, bias=True)
         self.bn0 = nn.BatchNorm1d(16)
-        self.conv1 = nn.Conv1d(16, 32, kernel_size=3, padding='same')
+        self.conv1 = nn.Conv1d(16, 32, kernel_size=3, padding=1, bias=True)
         self.bn1 = nn.BatchNorm1d(32)
-        self.conv2 = nn.Conv1d(32, 64, kernel_size=3, padding='same')
+        self.conv2 = nn.Conv1d(32, 64, kernel_size=3, padding=1, bias=True)
         self.bn2 = nn.BatchNorm1d(64)
-        self.conv3 = nn.Conv1d(64, 64, kernel_size=3, padding='same')
+        self.conv3 = nn.Conv1d(64, 64, kernel_size=3, padding=1, bias=True)
         self.bn3 = nn.BatchNorm1d(64)
-        self.conv4 = nn.Conv1d(64, 64, kernel_size=3, padding='same')
+        self.conv4 = nn.Conv1d(64, 64, kernel_size=3, padding=1, bias=True)
         self.bn4 = nn.BatchNorm1d(64)
-        self.conv5 = nn.Conv1d(64, 64, kernel_size=3, padding='same')
+        self.conv5 = nn.Conv1d(64, 64, kernel_size=3, padding=1, bias=True)
         self.bn5 = nn.BatchNorm1d(64)
-        self.conv6 = nn.Conv1d(64, 64, kernel_size=3, padding='same')
+        self.conv6 = nn.Conv1d(64, 64, kernel_size=3, padding=1, bias=True)
         self.bn6 = nn.BatchNorm1d(64)
-        self.conv7 = nn.Conv1d(64, 32, kernel_size=3, padding='same')
+        self.conv7 = nn.Conv1d(64, 32, kernel_size=3, padding=1, bias=True)
         self.bn7 = nn.BatchNorm1d(32)
-        self.fc1 = nn.Linear(4064, 128)
-        self.bn_dense = nn.BatchNorm1d(128)
-        self.fc2 = nn.Linear(128, 24)
+        self.fc1 = nn.Linear(256, 64, bias=True)
+        self.bn_dense = nn.BatchNorm1d(64)
+        self.fc2 = nn.Linear(64, 24, bias=True)
         self.relu = nn.ReLU()
         self.pooling = nn.MaxPool1d(2)
 
@@ -165,18 +170,22 @@ class UltraNet(nn.Module):
         x = self.conv3(x)
         x = self.bn3(x)
         x = self.relu(x)
+        x = self.pooling(x)
         
         x = self.conv4(x)
         x = self.bn4(x)
         x = self.relu(x)
+        x = self.pooling(x)
         
         x = self.conv5(x)
         x = self.bn5(x)
         x = self.relu(x)
+        x = self.pooling(x)
         
         x = self.conv6(x)
         x = self.bn6(x)
         x = self.relu(x)
+        x = self.pooling(x)
         
         x = self.conv7(x)
         x = self.bn7(x)
