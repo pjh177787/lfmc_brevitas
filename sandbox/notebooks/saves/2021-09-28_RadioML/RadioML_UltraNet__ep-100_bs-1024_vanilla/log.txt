@@ -31,103 +31,8 @@ UltraNet(
 Number of parameters: 82408
 
 Activate multi GPU support.
+Loading trained model from saves/2021-09-28_RadioML/RadioML_UltraNet__ep-100_bs-1024_vanilla/model_210928-1756UltraNet.pt.
 Loading data.
 Start training.
 
-==>>[2021-09-28 17:56:24] [Epoch=000/100] [Need: 00h00m][Avg: 00m00s] [LR=0.00100] [Best Acc=0.00]
-
-    **Train** Prec@1 41.917 Prec@5 73.332 Error@1 58.083
-    Accuracy of the network on the test images: 43.8 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:00:27] [Epoch=001/100] [Need: 06h39m][Avg: 04m02s] [LR=0.00090] [Best Acc=43.78]
-
-    **Train** Prec@1 49.903 Prec@5 76.566 Error@1 50.097
-    Accuracy of the network on the test images: 48.9 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:04:57] [Epoch=002/100] [Need: 06h58m][Avg: 04m16s] [LR=0.00065] [Best Acc=48.95]
-
-    **Train** Prec@1 52.291 Prec@5 77.138 Error@1 47.709
-    Accuracy of the network on the test images: 48.6 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:11:01] [Epoch=003/100] [Need: 07h52m][Avg: 04m52s] [LR=0.00035] [Best Acc=48.95]
-
-    **Train** Prec@1 53.698 Prec@5 77.454 Error@1 46.302
-    Accuracy of the network on the test images: 40.0 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:18:32] [Epoch=004/100] [Need: 08h51m][Avg: 05m31s] [LR=0.00010] [Best Acc=48.95]
-
-    **Train** Prec@1 54.684 Prec@5 77.670 Error@1 45.316
-    Accuracy of the network on the test images: 38.5 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:27:10] [Epoch=005/100] [Need: 09h44m][Avg: 06m09s] [LR=0.00100] [Best Acc=48.95]
-
-    **Train** Prec@1 53.991 Prec@5 77.310 Error@1 46.009
-    Accuracy of the network on the test images: 47.2 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:36:54] [Epoch=006/100] [Need: 10h34m][Avg: 06m44s] [LR=0.00090] [Best Acc=48.95]
-
-    **Train** Prec@1 55.363 Prec@5 77.488 Error@1 44.637
-    Accuracy of the network on the test images: 49.3 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:47:35] [Epoch=007/100] [Need: 11h19m][Avg: 07m18s] [LR=0.00065] [Best Acc=49.32]
-
-    **Train** Prec@1 56.305 Prec@5 77.643 Error@1 43.695
-    Accuracy of the network on the test images: 45.4 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 18:58:45] [Epoch=008/100] [Need: 11h56m][Avg: 07m47s] [LR=0.00035] [Best Acc=49.32]
-
-    **Train** Prec@1 57.131 Prec@5 77.808 Error@1 42.869
-    Accuracy of the network on the test images: 49.2 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 19:10:40] [Epoch=009/100] [Need: 12h30m][Avg: 08m15s] [LR=0.00010] [Best Acc=49.32]
-
-    **Train** Prec@1 57.717 Prec@5 77.949 Error@1 42.283
-    Accuracy of the network on the test images: 46.6 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 19:23:37] [Epoch=010/100] [Need: 13h04m][Avg: 08m43s] [LR=0.00100] [Best Acc=49.32]
-
-    **Train** Prec@1 56.548 Prec@5 77.651 Error@1 43.452
-    Accuracy of the network on the test images: 47.3 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 19:37:24] [Epoch=011/100] [Need: 13h37m][Avg: 09m10s] [LR=0.00090] [Best Acc=49.32]
-
-    **Train** Prec@1 57.043 Prec@5 77.736 Error@1 42.957
-    Accuracy of the network on the test images: 48.5 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 19:52:05] [Epoch=012/100] [Need: 14h08m][Avg: 09m38s] [LR=0.00065] [Best Acc=49.32]
-
-    **Train** Prec@1 57.651 Prec@5 77.828 Error@1 42.349
-    Accuracy of the network on the test images: 48.9 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 20:07:19] [Epoch=013/100] [Need: 14h36m][Avg: 10m04s] [LR=0.00035] [Best Acc=49.32]
-
-    **Train** Prec@1 58.253 Prec@5 77.970 Error@1 41.747
-    Accuracy of the network on the test images: 46.2 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 20:22:58] [Epoch=014/100] [Need: 15h00m][Avg: 10m28s] [LR=0.00010] [Best Acc=49.32]
-
-    **Train** Prec@1 58.744 Prec@5 78.116 Error@1 41.256
-    Accuracy of the network on the test images: 48.4 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 20:38:58] [Epoch=015/100] [Need: 15h21m][Avg: 10m50s] [LR=0.00100] [Best Acc=49.32]
-
-    **Train** Prec@1 57.577 Prec@5 77.836 Error@1 42.423
-    Accuracy of the network on the test images: 53.8 %
-    Saving the trained model and states.
-
-==>>[2021-09-28 20:55:09] [Epoch=016/100] [Need: 15h38m][Avg: 11m10s] [LR=0.00090] [Best Acc=53.84]
+==>>[2021-09-28 22:11:23] [Epoch=000/100] [Need: 00h00m][Avg: 00m00s] [LR=0.00100] [Best Acc=0.00]

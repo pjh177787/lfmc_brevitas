@@ -13,14 +13,14 @@ gtarget=0.0
 # data_dir='../../../RadioML/Data/GOLD_XYZ_OSC.0001_1024.hdf5'
 data_dir="/mnt/delta/Descartes/Git/RadioML_data/2018.01/GOLD_XYZ_OSC.0001_1024.hdf5"
 
-which_gpus="0"
+which_gpus="0,1"
 epochs=100
 batch_size=1024
 learning_rate=0.001
 decay=1e-5
 dataset=RadioML
 
-# pretrained_model="save/2021-06-24_toyota_cropped/toyota_resnet__ep-50_bs-32_vanilla/model_resnet-finetune.pt"
+pretrained_model="saves/2021-09-28_RadioML/RadioML_UltraNet__ep-100_bs-1024_vanilla/model_210928-1756UltraNet.pt"
 
 SUFFIX=vanilla
 
@@ -45,7 +45,7 @@ $PYTHON radioml.py --data_dir ${data_dir}   \
     --decay ${decay} \
     --which_gpus ${which_gpus} \
     --num_classes ${num_classes} \
-    # --resume ${pretrained_model} \
+    --resume ${pretrained_model} \
     # --finetune
     # --test \
     # --finetune \
