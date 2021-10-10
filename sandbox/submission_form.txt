@@ -1,0 +1,54 @@
+### INFO ###
+The format for the submission must be a zipfile including:
+ - This filled out form
+ - Full source code for end-to-end reproducibility
+ - Dockerfile-based environment setup
+   (we suggest to base your submission on this sandbox repository)
+ - Exported .onnx model with batch size = 1
+ - Trained .pth checkpoint
+
+### FILL IN ###
+# Overall test accuracy reached:
+-> 
+0.566037
+
+# Inference cost score reached:
+-> 
+0.090382
+
+# Complete output dictionary printed by the inference_cost() function:
+-> 
+{
+  "discount_sparsity": true,
+  "mem_o_FLOAT32": 65112.0,
+  "mem_w_SCALEDINT4": 38085.0,
+  "op_mac_SCALEDINT8_SCALEDINT4": 73728.0,
+  "op_mac_SCALEDUINT4_SCALEDINT4": 2800438.0,
+  "total_bops": 47166304.0,
+  "total_mem_o_bits": 2083584.0,
+  "total_mem_w_bits": 152340.0,
+  "unsupported": "set()"
+}
+
+# Path to .onnx model within this zipfile:
+-> 
+./notebooks/models/*.onnx
+
+# Path to .pth checkpoint within this zipfile:
+-> 
+./notebooks/IlliNet_trained.pth
+
+# Link to GitHub repository containing your code 
+# (to be made public after submission deadline):
+-> 
+https://github.com/pjh177787/brevitas-radioml-challenge-21
+
+# Instructions for reproduction:
+-> 
+1. Run run_docker.sh. Please remember to change dataset location.
+2. Run training_and_evaluation.ipynb for general training.
+3. Run training_and_pruning.ipynb for pruning.
+
+# Further comments:
+-> 
+My team name is LightNeting, and my username is pjh177787. If we could please change the team name to ''iSmart'', it would be really great. My teammates: microideax, dchen, and jinjun. They have all registered for ''AI for Good''. 

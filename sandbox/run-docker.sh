@@ -53,8 +53,8 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 : ${JUPYTER_PASSWD_HASH=sha1:a8165c509d95:e3d55958f35e77b8565d0c38a7cca31d7a0e2c3b} # "radioml"
 : ${NETRON_PORT=8081}
 : ${LOCALHOST_URL="localhost"}
-: ${DATASET_DIR=""}
-: ${DOCKER_GPUS=""}
+: ${DATASET_DIR="/mnt/delta/Descartes/Git/RadioML_data/2018.01"}
+: ${DOCKER_GPUS="all"}
 
 DOCKER_INTERACTIVE=""
 DOCKER_EXTRA=""
